@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 SeQura Engineering. All rights reserved.
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="SequraSplitpaymentsGatewayFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\Sequra\Splitpayments\Model\Ui\ConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form</argument>
+            <!--<argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Transparent\Form</argument>-->
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\ConfigurableInfo</argument>
+            <argument name="valueHandlerPool" xsi:type="object">SequraSplitpaymentsGatewayValueHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">SequraSplitpaymentsValidatorPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="SequraSplitpaymentsGatewayConfig" type="Sequra\Splitpayments\Model\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\Sequra\Splitpayments\Model\Ui\ConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Sequra\Splitpayments\Model\Ui\ConfigProvider">
+       <arguments>
+           <argument name="config" xsi:type="object">SequraSplitpaymentsGatewayConfig</argument>
+       </arguments>
+    </type>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="SequraSplitpaymentsGatewayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">SequraSplitpaymentsGatewayConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SequraSplitpaymentsGatewayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">SequraSplitpaymentsGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Validators -->
+    <virtualType name="SequraSplitpaymentsValidatorPool" type="Magento\Payment\Gateway\Validator\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="country" xsi:type="string">SequraSplitpaymentsCountryValidator</item>
+                <!-- Core validator -->
+                <item name="currency" xsi:type="string">SequraGatewayCurrencyValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="SequraSplitpaymentsCountryValidator" type="Magento\Payment\Gateway\Validator\CountryValidator">
+        <arguments>
+            <argument name="config" xsi:type="object">SequraSplitpaymentsGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Sequra\Splitpayments\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">SequraSplitpaymentsGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <type name="Sequra\Splitpayments\Block\Widget\Teaser">
+        <arguments>
+            <argument name="config" xsi:type="object">SequraSplitpaymentsGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <type name="Sequra\Splitpayments\Model\Config\Source\Splitpayments">
+        <arguments>
+            <argument name="config" xsi:type="object">SequraSplitpaymentsGatewayConfig</argument>
+        </arguments>
+    </type>
+</config>
