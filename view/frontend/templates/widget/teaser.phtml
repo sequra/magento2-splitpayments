@@ -5,7 +5,7 @@
             "Sequra_Core/js/widget-js": {
                 "max_amount": "<?php echo (int)$block->getMaxOrderTotal();?>",
                 "css_price_selector": "<?php echo addslashes($block->getData('price_sel'));?>",
-                "css_dest_selector": "<?php echo addslashes($block->getData('dest_sel'));?>",
+                "css_dest_selector": "<?php echo addslashes($block->getData('dest_sel')?:'#sequra_splitpayments_teaser');?>",
                 "theme": "<?php echo addslashes($block->getData('theme'));?>",
                 "product": "<?php echo addslashes($block->getProduct());?>",
                 "sequra_configuration":{
