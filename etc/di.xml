@@ -21,7 +21,7 @@
     </virtualType>
 
     <!-- Configuration reader -->
-    <virtualType name="SequraSplitpaymentsGatewayConfig" type="Sequra\Splitpayments\Model\Config">
+    <virtualType name="SequraSplitpaymentsGatewayConfig" type="Sequra\Core\Model\Config">
         <arguments>
             <argument name="methodCode" xsi:type="const">\Sequra\Splitpayments\Model\Ui\ConfigProvider::CODE</argument>
         </arguments>

@@ -22,6 +22,8 @@
                 <product>sp1</product>
                 <max_order_total>2500</max_order_total>
                 <min_order_total>50</min_order_total>
+                <allowspecific>1</allowspecific>
+                <specificcountry>ES</specificcountry>
             </sequra_splitpayments>
         </payment>
     </default>

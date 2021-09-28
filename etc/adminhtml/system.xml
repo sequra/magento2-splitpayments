@@ -30,6 +30,12 @@
                         <label>Show logo</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="150" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <config_path>payment/sequra_splitpayments/specificcountry</config_path>
+                        <label>Payment From Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    </field>
                 </group>
             </group>
         </section>
