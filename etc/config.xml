@@ -18,6 +18,8 @@
                 <can_capture>1</can_capture>
                 <can_use_for_multishipping>0</can_use_for_multishipping>
                 <can_capture_partial>0</can_capture_partial>
+                <can_refund>1</can_refund>
+                <can_refund_partial_per_invoice>1</can_refund_partial_per_invoice>
                 <sort_order>1</sort_order>
                 <product>sp1</product>
                 <max_order_total>2500</max_order_total>
