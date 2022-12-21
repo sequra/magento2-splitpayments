@@ -22,8 +22,13 @@
                     </field>
                     <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
                            showInStore="1">
-                        <label>Title</label>
+                        <label>Title (checkout)</label>
                         <config_path>payment/sequra_splitpayments/title</config_path>
+                    </field>
+                    <field id="checkout_title" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1"
+                    showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/sequra_splitpayments/checkout_title</config_path>
                     </field>
                     <field id="showlogo" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <config_path>payment/sequra_splitpayments/showlogo</config_path>

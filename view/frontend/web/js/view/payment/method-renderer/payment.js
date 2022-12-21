@@ -30,8 +30,32 @@ define(
             },
 
             initObservable: function () {
-                this._super();
-                Sequra.onLoad(function(){Sequra.refreshComponents();});
+                this._super()
+                    .observe([
+                        'title'
+                    ]);
+                this.title(window.checkoutConfig.payment.sequra_splitpayments.checkout_title);
+                var comp = this;
+                Sequra.onLoad(function(){
+                    var creditAgreements = Sequra.computeCreditAgreements({
+                        amount: comp.getAmount().toString(),
+                        product: window.checkoutConfig.payment.sequra_splitpayments.product
+                    });
+                    var ca = creditAgreements[window.checkoutConfig.payment.sequra_splitpayments.product];
+                    var instalment_total = ca[ca.length - 1]["instalment_total"]["string"];
+                    var instalment_counts = ca.reverse().reduce(
+                        (carry,item) => {
+                            return item['instalment_count'] + "," + carry;
+                        },
+                        ""
+                    ).replace(/,([\d]*),$/, " " + jQuery.mage.__('or') + " $1");
+                    ca.reverse(); //leave it as it was
+                    var interpolated_title = window.checkoutConfig.payment.sequra_splitpayments.checkout_title
+                        .replace('%s', instalment_total)
+                        .replace('%{instalment_counts}', instalment_counts)
+                        .replace('%{instalment_total}', instalment_total);
+                    comp.title(interpolated_title);
+                });
                 return this;
             },
 

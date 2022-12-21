@@ -28,7 +28,7 @@ final class ConfigProvider extends \Sequra\Core\Model\Ui\ConfigProvider
                     'configuration' => $config['payment']['sequra_configuration'],
                     'showlogo' => $this->config->getValue('showlogo'),
                     'product' => $this->config->getValue('product'),
-                    'splitpayments' => $this->config->getValue('splitpayments')
+                    'checkout_title' => $this->config->getValue('checkout_title'),
                 ]
             ]
         ];
